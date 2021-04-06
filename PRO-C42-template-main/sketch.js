@@ -5,9 +5,7 @@ const Bodies = Matter.Bodies;
 var engine, world;
 var drops = []
 var maxDrops = 100
-var umbrella
-var rand;
-var night
+var umbrella;
 var thunder, thunder1,thunder2,thunder3,thunder4;
 var batAnimation,bat;
 var thunderCreatedFrame=0;
@@ -21,8 +19,7 @@ function preload(){
     batAnimation = loadAnimation("bat/bat1.png","bat/bat2.png","bat/bat3.png",
                         "bat/bat4.png","bat/bat5.png","bat/bat6.png",
                         "bat/bat7.png","bat/bat8.png","bat/bat9.png",
-                        "bat/bat10.png","bat/bat11.png","bat/bat12.png");
-   
+                        "bat/bat10.png","bat/bat11.png","bat/bat12.png");   
 }
 
 function setup(){
@@ -45,7 +42,7 @@ function draw(){
     background(0); 
 
     //creating thunder
-    rand = Math.round(random(1,4));
+    var rand = Math.round(random(1,4));
     if(frameCount%80===0){
         thunderCreatedFrame=frameCount;
         thunder = createSprite(random(10,370), random(10,30), 10, 10);
@@ -63,35 +60,28 @@ function draw(){
         thunder.scale = random(0.3,0.6)
     }
 
-  
-
     bat= createSprite(Math.round(random(0,400)),Math.round(random(0,400)));
     bat.addAnimation("moving_bat",batAnimation);
     bat.visible = false;
+    
     if(frameCount % 100 === 0){
        bat.visible = true;
         bat.velocityX = Math.round(random(-4,4));
         bat.velocityY = Math.round(random(-4,4));
         bat.scale=0.4;
-        
-       
-    }
-    
+    }  
 
     if(thunderCreatedFrame + 10 ===frameCount && thunder){
         thunder.destroy();
     }
-
+    
     umbrella.display();
-    console.log(drops)
+    
     //display rain drops
-   for(var i = 0; 1< maxDrops; i++){
-      
-       drops[i].display()
-        drops[i].update()
-       
+   for(var i = 0; 1< maxDrops; i++){      
+       drops[i].display();
+       drops[i].update();       
    }
 
     drawSprites();
-}   
-
+} 
